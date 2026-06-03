@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vhole\\RiderProjects\\2. pololetí(2SŠ)\\BlackJackGame\\console-blackjack.csproj",
-      "projectName": "console-blackjack",
-      "projectPath": "C:\\Users\\vhole\\RiderProjects\\2. pololetí(2SŠ)\\BlackJackGame\\console-blackjack.csproj",
+      "projectUniqueName": "C:\\Users\\vhole\\RiderProjects\\2. pololetí(2SŠ)\\BlackJackGame\\BlackjackGame.csproj",
+      "projectName": "BlackjackGame",
+      "projectPath": "C:\\Users\\vhole\\RiderProjects\\2. pololetí(2SŠ)\\BlackJackGame\\BlackjackGame.csproj",
       "packagesPath": "C:\\Users\\vhole\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\vhole\\RiderProjects\\2. pololetí(2SŠ)\\BlackJackGame\\obj\\",
       "projectStyle": "PackageReference",

@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "console-blackjack", "console-blackjack.csproj", "{1B17EBCE-7B64-4B56-8625-A2CFB4C9ADC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackjackGame", "BlackjackGame.csproj", "{1B17EBCE-7B64-4B56-8625-A2CFB4C9ADC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
