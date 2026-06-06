@@ -15,12 +15,12 @@
         private void GenerateDeck()
         {
             // Vezmeme enum CardType a uděláme z něj pole všech 4 barev
-            CardType[] suits = { CardType.Hearts, CardType.Diamonds, CardType.Clubs, CardType.Spades };
+            CardType[] type = { CardType.Hearts, CardType.Diamonds, CardType.Clubs, CardType.Spades };
             
             string[] ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
             
             // Spojím barvy a čísla = 4 x 13 a to je 52 kominací.
-            foreach (CardType suit in suits)
+            foreach (CardType suit in type)
             {
                 foreach (string rank in ranks)
                 {
@@ -46,7 +46,6 @@
         // Míchání karek pomocí FIsher-Yates algoritmu 
         public void Shuffle()
         {
-            
             for (int i = cards.Count - 1; i > 0; i--)
             {
                 // Vybereme náhodný index od 0 do i
