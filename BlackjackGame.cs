@@ -6,9 +6,8 @@ public class BlackjackGame
 
     public void Start()
     {
-        // ÚPLNĚ NA ZAČÁTEK: Vyčistí konzoli hned při spuštění hry
         Console.Clear();
-
+        // Zajišťuje správné zobrazení UTF-8 znaků (symboly srdce, piky...) v konzoli Windows.
         Console.OutputEncoding = System.Text.Encoding.UTF8;
 
         Console.ForegroundColor = ConsoleColor.Cyan;
@@ -39,8 +38,7 @@ public class BlackjackGame
 
             player.ClearHand();
             dealer.ClearHand();
-
-            // Začátek hry ve fialové barvě (Magenta)
+            
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine($"\n--- NOVÁ HRA ZAČÍNÁ (Tvůj stav: {player.Chips} tokenů) ---");
             Console.ResetColor();
@@ -50,18 +48,15 @@ public class BlackjackGame
             {
                 Console.Write($"Kolik tokenů chceš vsadit do této hry? (1 - {player.Chips}): ");
                 string input = Console.ReadLine();
-
-                // Vyzkoušíme bezpečně provést kód, který by mohl hodit chybu
+                
                 try
                 {
-                    // 1. Převedeme text z klávesnice přímo na celé číslo školní metodou
                     initialBet = int.Parse(input);
-
-                    // 2. V samostatné podmínce zkontrolujeme, jestli je částka správná
+                    
                     if (initialBet > 0 && initialBet <= player.Chips)
                     {
                         player.HandBets[0] = initialBet;
-                        break; // Sázka je v pořádku, vyskočíme ze smyčky
+                        break; 
                     }
                 }
                 catch (FormatException)
@@ -69,17 +64,14 @@ public class BlackjackGame
                     // Sem program skočí jen tehdy, když int.Parse selže (uživatel nezadal číslo)
                     // Necháme blok prázdný, abychom chybu ignorovali a hra nespadla
                 }
-
-                // Pokud převod selhal nebo sázka neodpovídala limitům, vypíšeme chybu a jedeme znovu
+                
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Neplatná sázka! Musíš zadat číslo od 1 do {player.Chips}.");
                 Console.ResetColor();
             }
-
-            // Vyčistí konzoli od zadávání sázky, aby nové karty začínaly na čisté obrazovce
             Console.Clear();
 
-            // --- ANIMACE ROZDÁVÁNÍ KARET NA ZAČÁTKU (Pauza 1 sekunda) ---
+            // Animace rozdávání karet na začátku (Pauza 1 sekunda)
             Console.WriteLine("Dealer míchá a rozdává karty...");
             System.Threading.Thread.Sleep(1000);
             Console.Clear();
@@ -113,7 +105,7 @@ public class BlackjackGame
             dealer.ShowHandHidden();
             // ------------------------------------------
 
-            // --- KOLO HRÁČE (Procházíme postupně všechny jeho ruce) ---
+            // Kolo hráče (Procházíme postupně všechny jeho ruce)
             for (int i = 0; i < player.Hands.Count; i++)
             {
                 bool handTurn = true;
@@ -138,9 +130,9 @@ public class BlackjackGame
                     dealer.ShowHandHidden();
 
                     int currentScore = player.CalculateScore(i);
-                    // PODMÍNKA PRO DOUBLE: Pouze pokud má hráč 2 karty, jejich součet je 9, 10 nebo 11 a má dost žetonů
+                    // Pouze pokud má hráč 2 karty, jejich součet je 9, 10 nebo 11 a má dost žetonů
                     bool canDouble = player.Hands[i].Count == 2 && (currentScore == 9 || currentScore == 10 || currentScore == 11) && player.Chips >= (GetTotalActiveBets() + player.HandBets[i]);
-                    // PODMÍNKA PRO SPLIT: První dvě karty stejné hodnoty a dostatek žetonů
+                    // První dvě karty stejné hodnoty a dostatek žetonů
                     bool canSplit = player.Hands[i].Count == 2 && player.Hands[i][0].Rank == player.Hands[i][1].Rank && player.Chips >= (GetTotalActiveBets() + player.HandBets[i]);
 
                     Console.Write($"\n[Hraje Ruka {i + 1}] Co chceš udělat? (h = hit / s = stand");
@@ -170,7 +162,10 @@ public class BlackjackGame
                     else if ((choice == "p" || choice == "split") && canSplit)
                     {
                         // Vytvoříme novou ruku a přesuneme do ní druhou kartu
-                        List<Card> newHand = new List<Card> { player.Hands[i][1] };
+                        List<Card> newHand = new List<Card>
+                        {
+                            player.Hands[i][1]
+                        };
                         player.Hands.Add(newHand);
                         player.HandBets.Add(player.HandBets[i]); // Nová ruka přebírá stejnou sázku
                         
@@ -198,8 +193,7 @@ public class BlackjackGame
                     }
                 }
             }
-
-            // Závěrečné vyčištění a zobrazení finálního stavu hráče po ukončení jeho tahů
+            
             Console.Clear();
             for (int k = 0; k < player.Hands.Count; k++) player.ShowHand(k);
             dealer.ShowHandHidden();
@@ -221,7 +215,7 @@ public class BlackjackGame
             }
             else
             {
-                // --- KOLO DEALERA (Vypisuje VŠECHNY ruce hráče) ---
+                // Kolo dealera (Vypisuje všechny ruce hráče) ---
                 Console.Clear();
                 Console.WriteLine("\n--- KOLO DEALERA ---");
                 for (int k = 0; k < player.Hands.Count; k++) player.ShowHand(k);
@@ -249,7 +243,7 @@ public class BlackjackGame
                 int dealerScore = dealer.CalculateScore(0);
                 System.Threading.Thread.Sleep(1200);
 
-                // --- VYHODNOCENÍ VÝSLEDKŮ ---
+                // Vyhodnocení výsledků
                 Console.WriteLine("\n--- VÝSLEDEK ---");
 
                 for (int i = 0; i < player.Hands.Count; i++)
@@ -258,7 +252,7 @@ public class BlackjackGame
                 }
             }
 
-            // KONTROLA SÁZKY NA DALŠÍ KOLO
+            // Kontrola sázky na druhé kolo
             if (player.Chips > 0)
             {
                 while (true)
@@ -289,7 +283,7 @@ public class BlackjackGame
         Console.WriteLine("Díky za hru! Stiskni libovolnou klávesu pro ukončení...");
         Console.ReadKey();
     }
-
+    // Pomocná metoda, která sečte hodnoty sázek ze všech rukou.
     private int GetTotalActiveBets()
     {
         int total = 0;

@@ -16,9 +16,10 @@ public abstract class Participant
         HandBets = new List<int> { 0 };
     }
     
-    public void AddCard(Card card, int handIndex = 0)
+    // Přidá kartu do vybrané ruky (když index nenapíšeš, dá ji automaticky do té první = ruka 0)
+    public void AddCard(Card card, int handIndex = 0)   
     {
-        Hands[handIndex].Add(card);
+        Hands[handIndex].Add(card); // Vezme ruku podle zadaného čísla a vloží do ní kartu
     }
 
     // Výpočet skóre pro konkrétní ruku podle indexu
@@ -50,12 +51,11 @@ public abstract class Participant
         return "♠";
     }
 
-    // Vykreslení konkrétní ruky podle indexu - JEDNODUŠE BEZ CUSTOMLABEL
+    // Vykreslení konkrétní ruky podle indexu 
     public void ShowHand(int handIndex = 0)
     {
         List<Card> currentHand = Hands[handIndex];
-
-        // 1. Žlutě vypíšeme jméno (Player / Dealer)
+        
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.Write(Name);
         Console.ResetColor();
@@ -75,7 +75,7 @@ public abstract class Participant
 
         if (currentHand.Count == 0) return;
 
-        // RÁDEK 1
+        // Vykreslí vrchní okraje všech karet v dané ruce vedle sebe
         for (int i = 0; i < currentHand.Count; i++) 
         {
             if (currentHand[i].Suit == CardType.Hearts || currentHand[i].Suit == CardType.Diamonds) Console.ForegroundColor = ConsoleColor.Red;
@@ -84,7 +84,7 @@ public abstract class Participant
         }
         Console.WriteLine();
 
-        // RÁDEK 2
+        // Vykreslí horní hodnotu (Rank) karty a ošetřuje zarovnání pro dvouciferné číslo "10"
         for (int i = 0; i < currentHand.Count; i++)
         {
             if (currentHand[i].Suit == CardType.Hearts || currentHand[i].Suit == CardType.Diamonds) Console.ForegroundColor = ConsoleColor.Red;
@@ -95,7 +95,7 @@ public abstract class Participant
         }
         Console.WriteLine();
 
-        // RÁDEK 3
+        // Vykreslí grafický symbol barvy (srdce, káry...) doprostřed karet
         for (int i = 0; i < currentHand.Count; i++)
         {
             if (currentHand[i].Suit == CardType.Hearts || currentHand[i].Suit == CardType.Diamonds) 
@@ -105,7 +105,7 @@ public abstract class Participant
         }
         Console.WriteLine();
 
-        // RÁDEK 4
+        // Vykreslí dolní hodnotu karty (zarovnanou doprava)
         for (int i = 0; i < currentHand.Count; i++)
         {
             if (currentHand[i].Suit == CardType.Hearts || currentHand[i].Suit == CardType.Diamonds) Console.ForegroundColor = ConsoleColor.Red;
@@ -116,7 +116,7 @@ public abstract class Participant
         }
         Console.WriteLine();
 
-        // RÁDEK 5
+        // Vykreslí spodní okraje všech karet
         for (int i = 0; i < currentHand.Count; i++) 
         {
             if (currentHand[i].Suit == CardType.Hearts || currentHand[i].Suit == CardType.Diamonds) Console.ForegroundColor = ConsoleColor.Red;
@@ -126,7 +126,7 @@ public abstract class Participant
         Console.WriteLine();
         Console.WriteLine();
     }
-
+    // Speciální metoda pro Dealera na začátku hry – vykreslí první kartu odhalenou a druhou jako skrytý otazník "?"    
     public void ShowHandHidden()
     {
         Console.ForegroundColor = ConsoleColor.Blue;
@@ -136,6 +136,7 @@ public abstract class Participant
         
         Console.Write("Celkem bodů: ");
         Console.ForegroundColor = ConsoleColor.Red;
+        // Jelikož je druhá karta skrytá, bodový součet na obrazovce ukazuje pouze hodnotu PRVNÍ karty (index 0,0)
         Console.WriteLine(Hands[0][0].Value);
         Console.ResetColor();
 
@@ -143,14 +144,14 @@ public abstract class Participant
 
         bool isFirstRed = (Hands[0][0].Suit == CardType.Hearts || Hands[0][0].Suit == CardType.Diamonds);
 
-        // RÁDEK 1
+        // ŘÁDEK 1
         if (isFirstRed) Console.ForegroundColor = ConsoleColor.Red;
         Console.Write("┌───────┐  ");
         Console.ResetColor();
         Console.Write("┌───────┐  ");
         Console.WriteLine();
         
-        // RÁDEK 2
+        // ŘÁDEK 2
         if (isFirstRed) Console.ForegroundColor = ConsoleColor.Red;
         string rank = Hands[0][0].Rank;
         if (rank == "10") Console.Write("│ 10    │  ");
@@ -158,20 +159,20 @@ public abstract class Participant
         Console.ResetColor();
         Console.WriteLine("│ ?     │  ");
 
-        // RÁDEK 3
+        // ŘÁDEK 3
         if (isFirstRed) Console.ForegroundColor = ConsoleColor.Red;
         Console.Write($"│   {ReturnSymbol(Hands[0][0])}   │  ");
         Console.ResetColor();
         Console.WriteLine("│   ?   │  ");
 
-        // RÁDEK 4
+        // ŘÁDEK 4
         if (isFirstRed) Console.ForegroundColor = ConsoleColor.Red;
         if (rank == "10") Console.Write("│    10 │  ");
         else Console.Write($"│     {rank} │  ");
         Console.ResetColor();
         Console.WriteLine("│     ? │  ");
 
-        // RÁDEK 5
+        // ŘÁDEK 5
         if (isFirstRed) Console.ForegroundColor = ConsoleColor.Red;
         Console.Write("└───────┘  ");
         Console.ResetColor();
@@ -180,6 +181,7 @@ public abstract class Participant
         Console.WriteLine();
     }
     
+    // Resetování objektu pro novou hru.
     public void ClearHand()
     {
         Hands.Clear();

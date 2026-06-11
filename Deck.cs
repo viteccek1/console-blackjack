@@ -19,7 +19,7 @@
             
             string[] ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
             
-            // Spojím barvy a čísla = 4 x 13 a to je 52 kominací.
+            // Dva vnořené cykly foreach zkombinují každou barvu s každým číslem (4 barvy x 13 hodnot = 52 karet).
             foreach (CardType suit in type)
             {
                 foreach (string rank in ranks)

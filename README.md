@@ -3,7 +3,7 @@
 > Ahoj! Tohle je můj školní projekt – klasická karetní hra Blackjack (neboli Oko bere) napsaná v C# pro obyčejnou textovou konzoli. Chtěl jsem, aby to nebyla jen nudná klikačka, takže to umí i pokročilejší věci, co najdeš v opravdovém kasinu. 
 
 ---
-Při vývoji hry jsem nejprve navrhl základní strukturu projektu a následně postupně přidával jednotlivé herní funkce. Umělou inteligenci (AI) jsem použil hlavně na začátku celého projektu, aby mi řekla, jak vůbec začít, jak si projekt rozvrhnout a jaké třídy (soubory) si mám připravit.
+Při vývoji hry jsem nejprve navrhl základní strukturu projektu a následně postupně přidával jednotlivé herní funkce. Umělou inteligenci (AI) jsem použil hlavně na začátku celého projektu, aby mi řekla, jak vůbec začít, jak si projekt rozvrhnout a jaké třídy (soubory) si mám připravit. Nechal jsem si poradit při funkci splitkde bylo potřeba rozdělit `Hands` na dvě samostatné ruky.
 
 ##  Co hra umí a jaké má funkce
 
